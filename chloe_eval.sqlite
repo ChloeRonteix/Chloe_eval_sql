@@ -1,0 +1,76 @@
+CREATE TABLE students (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT
+);
+
+CREATE TABLE skills (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT
+);
+
+CREATE TABLE skills_students (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+id_student INT,
+id_skill INT,
+level TEXT,
+FOREIGN KEY (id_student) REFERENCES students(id),
+FOREIGN KEY (id_skill) REFERENCES skills(id)
+);
+
+INSERT INTO students (name) VALUES
+('Adrien'),
+('Aurore'),
+('Steeven'),
+('Fatima'),
+('Thibault'),
+('Pierre'),
+('Lucas'),
+('Julie'),
+('Isabelle'),
+('Voja'),
+('Maxime'),
+('Deborah'),
+('Clement'),
+('Muriel'),
+('Hugo'),
+('Camille'),
+('Chloe');
+
+INSERT INTO skills (name) VALUES
+('C1'),
+('C2'),
+('C3');
+
+SELECT * FROM students;
+SELECT * FROM skills;
+
+INSERT INTO skills_students (id_student, id_skill, level)
+VALUES
+(4,1,'vert'),
+(12,1,'vert'),
+(11,1,'bleu'),
+(3,1,'bleu'),
+(16,1,'bleu'),
+(6,1,'violet'),
+(13,1,'violet'),
+(4,2,'vert'),
+(12,2,'vert'),
+(3,2,'vert'),
+(16,2,'vert'),
+(7,2,'bleu'),
+(17,2,'bleu'),
+(6,2,'bleu'),
+(9,3,'bleu'),
+(8,3,'bleu'),
+(10,3,'bleu'),
+(3,3,'violet'),
+(16,3,'violet');
+
+SELECT * FROM skills_students;
+
+--Requete du changement de statut de l'apprenant
+UPDATE skills_students
+SET level = 'vert'
+WHERE id_student = (SELECT id FROM students WHERE name = 'student_name');
+
+
